@@ -1,6 +1,8 @@
 <template>
   <div class="loginBox">
+    <!-- logo -->
     <section class="logo"></section>
+    <!-- 登录表单 -->
     <el-form
       :model="loginForm"
       :rules="loginFormrules"
@@ -8,6 +10,7 @@
       label-width="100px"
       class="demo-ruleForm"
     >
+      <!-- 用户名输入框 -->
       <el-form-item label-width="0" prop="username">
         <el-input
           prefix-icon="el-icon-user-solid"
@@ -15,6 +18,7 @@
           placeholder="请输入用户名"
         ></el-input>
       </el-form-item>
+      <!-- 密码输入框 -->
       <el-form-item label-width="0" prop="password">
         <el-input
           prefix-icon="el-icon-lock"
@@ -25,7 +29,9 @@
       </el-form-item>
       <el-form-item label-width="0">
         <el-button type="warning" @click="resetLoginForm">重置</el-button>
-        <el-button type="primary">登录</el-button>
+        <el-button type="primary" @click="login" :loading="isLoading"
+          >登录</el-button
+        >
       </el-form-item>
     </el-form>
   </div>
@@ -49,12 +55,49 @@ export default {
           { required: true, message: '请输入密码', trigger: 'blur' },
           { min: 6, message: '长度在6 到 16 个字符', trigger: 'blur' }
         ]
-      }
+      },
+      isLoading: false
     }
   },
   methods: {
     resetLoginForm() {
       this.$refs.loginFormRef.resetFields()
+    },
+    async login() {
+      // 登录表单预校验
+      this.$refs.loginFormRef.validate(async valid => {
+        if (!valid) {
+          return this.$message({
+            message: '预校验失败',
+            type: 'error'
+          })
+        }
+        // 登录按钮loading...
+        this.isLoading = true
+        // 发送请求
+        const loginUser = await this.$axios.post('/login', this.loginForm)
+        console.log(loginUser)
+        // 如果data不为空 说明登录成功
+        if (loginUser.data === null && loginUser.meta.status === 400) {
+          // 登录失败提醒用户
+          this.$message({
+            message: '用户名或者密码错误!',
+            type: 'error'
+          })
+          // 重置登录按钮
+          this.isLoading = false
+        } else {
+          // 登录成功
+          this.$message({
+            message: '登录成功!',
+            type: 'success'
+          })
+          // 把token值存储在window.sessionStorage中
+          window.sessionStorage.setItem('token', loginUser.data.token)
+          // 重置登录按钮
+          this.isLoading = false
+        }
+      })
     }
   }
 }
@@ -97,6 +140,10 @@ export default {
 @media screen and (max-width: 540px) {
   .loginBox {
     width: 350px;
+  }
+  .logo {
+    width: 125px !important;
+    height: 125px !important;
   }
 }
 </style>

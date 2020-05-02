@@ -6,7 +6,8 @@ import {
   Col,
   Form,
   FormItem,
-  Icon
+  Icon,
+  Message
 } from 'element-ui'
 
 Vue.use(Button)
@@ -16,3 +17,4 @@ Vue.use(Col)
 Vue.use(Form)
 Vue.use(FormItem)
 Vue.use(Icon)
+Vue.prototype.$message = Message
