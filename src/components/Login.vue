@@ -39,7 +39,6 @@
 
 <script>
 export default {
-  name: 'Login',
   data() {
     return {
       loginForm: {
@@ -94,8 +93,11 @@ export default {
           })
           // 把token值存储在window.sessionStorage中
           window.sessionStorage.setItem('token', loginUser.data.token)
+          this.$router.push('/home')
           // 重置登录按钮
-          this.isLoading = false
+          setTimeout(function() {
+            this.isLoading = false
+          }, 3000)
         }
       })
     }

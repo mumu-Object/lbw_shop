@@ -7,7 +7,12 @@ import {
   Form,
   FormItem,
   Icon,
-  Message
+  Message,
+  Header,
+  Container,
+  Main,
+  Aside,
+  Dialog
 } from 'element-ui'
 
 Vue.use(Button)
@@ -17,4 +22,9 @@ Vue.use(Col)
 Vue.use(Form)
 Vue.use(FormItem)
 Vue.use(Icon)
+Vue.use(Header)
+Vue.use(Container)
+Vue.use(Main)
+Vue.use(Aside)
+Vue.use(Dialog)
 Vue.prototype.$message = Message
