@@ -10,7 +10,7 @@ import 'element-ui/lib/theme-chalk/display.css'
 import axios from 'axios'
 // 设置axios默认地址
 axios.defaults.baseURL = 'http://192.168.0.108:8888/api/private/v1/'
-// axios响应拦截器
+// axios请求拦截器
 axios.interceptors.request.use(config => {
   config.headers.Authorization = window.sessionStorage.getItem('token')
   return config

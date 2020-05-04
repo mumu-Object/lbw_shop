@@ -8,14 +8,14 @@
             <el-button
               @click="openaside"
               class="left"
-              type="info"
+              :type="isOpen ? 'primary' : 'info'"
               :icon="isOpen ? 'el-icon-s-fold' : 'el-icon-s-unfold'"
               plain
             ></el-button>
           </el-col>
           <!-- logo -->
           <el-col :span="8">
-            <img :class="isXYScpt" src="../assets/images/logo2.png" alt="" />
+            <img :class="isXYScpt" src="../assets/images/logo2.png" alt />
           </el-col>
           <el-col class="hidden-sm-and-down logo-text" :span="8">
             <h1>电商后台管理系统</h1>
@@ -28,9 +28,7 @@
               type="info"
               icon="el-icon-caret-right"
               plain
-            >
-              {{ logoutText }}
-            </el-button>
+            >{{ logoutText }}</el-button>
           </el-col>
         </el-row>
       </el-header>
@@ -68,9 +66,7 @@
             >
               <template slot="title">
                 <i :class="menuIconList[index]"></i>
-                <span>
-                  {{ item.authName }}
-                </span>
+                <span>{{ item.authName }}</span>
               </template>
               <!-- 二级菜单 -->
               <el-menu-item
@@ -87,15 +83,13 @@
             </el-submenu>
           </el-menu>
         </el-aside>
-        <el-main>Main</el-main>
+        <el-main>
+          <router-view :isXYs="isXYS"></router-view>
+        </el-main>
       </el-container>
     </el-container>
     <!-- 退出登录对话框 -->
-    <el-dialog
-      title="退出登录"
-      :visible.sync="logoutVisible"
-      :width="isXYS ? '300px' : '30%'"
-    >
+    <el-dialog title="退出登录" :visible.sync="logoutVisible">
       <span>确认要退出当前账号吗？</span>
       <span slot="footer" class="dialog-footer">
         <el-button @click="logoutVisible = false">取 消</el-button>
@@ -132,8 +126,11 @@ export default {
     }
     const menus = await this.$axios.get('/menus')
     this.menuList = menus.data
+    if (!window.sessionStorage.getItem('menuSelectedIndex')) {
+      this.menuSelectedIndex = '/users'
+      return
+    }
     this.menuSelectedIndex = window.sessionStorage.getItem('menuSelectedIndex')
-    console.log(this.menuSelectedIndex)
   },
   computed: {
     isXYScpt() {
@@ -202,13 +199,11 @@ export default {
   text-align: center;
   line-height: 200px;
   transition: all 0.4s;
+  z-index: 999;
 }
 
 .el-main {
   background-color: #e9eef3; /*#e9eef3*/
-  color: #333;
-  text-align: center;
-  line-height: 160px;
 }
 
 body > .el-container {

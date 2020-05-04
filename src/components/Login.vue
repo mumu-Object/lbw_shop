@@ -93,6 +93,7 @@ export default {
           })
           // 把token值存储在window.sessionStorage中
           window.sessionStorage.setItem('token', loginUser.data.token)
+          window.sessionStorage.setItem('lbw_shop_login-user_id', loginUser.data.id)
           this.$router.push('/home')
           // 重置登录按钮
           setTimeout(function() {

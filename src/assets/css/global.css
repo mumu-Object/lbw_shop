@@ -9,3 +9,23 @@ body {
   background-color: #2b4b6b;
   height: 100%;
 }
+.el-card {
+  margin-top: 15px;
+}
+.el-table {
+  margin-top: 15px;
+}
+.el-table td,
+.el-table th {
+  text-align: center;
+}
+.el-pagination {
+  margin-top: 15px;
+}
+@media screen and (max-width: 768px) {
+  .el-message,
+  .el-message-box,
+  .el-dialog {
+    width: 300px;
+  }
+}
