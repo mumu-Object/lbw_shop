@@ -125,16 +125,21 @@
         class="demo-ruleForm"
       >
         <el-form-item label="用户名" prop="username">
-          <el-input v-model="addForm.username" placeholder="请输入用户名"></el-input>
+          <el-input v-model.trim="addForm.username" placeholder="请输入用户名"></el-input>
         </el-form-item>
         <el-form-item label="密码" prop="password">
-          <el-input type="password" v-model="addForm.password" show-password placeholder="请输入密码"></el-input>
+          <el-input
+            type="password"
+            v-model.trim="addForm.password"
+            show-password
+            placeholder="请输入密码"
+          ></el-input>
         </el-form-item>
         <el-form-item label="邮箱" prop="email">
-          <el-input v-model="addForm.email" placeholder="请输入邮箱"></el-input>
+          <el-input v-model.trim="addForm.email" placeholder="请输入邮箱"></el-input>
         </el-form-item>
         <el-form-item label="手机号码" prop="mobile">
-          <el-input v-model.number="addForm.mobile" placeholder="请输入手机号码"></el-input>
+          <el-input v-model.trim="addForm.mobile" placeholder="请输入手机号码"></el-input>
         </el-form-item>
         <el-form-item>
           <el-button @click="addUserVisible = false" type="warning">取消</el-button>
@@ -163,13 +168,13 @@
         class="demo-ruleForm"
       >
         <el-form-item label="用户名" prop="username">
-          <el-input v-model="modifyForm.username" disabled></el-input>
+          <el-input v-model.trim="modifyForm.username" disabled></el-input>
         </el-form-item>
         <el-form-item label="邮箱" prop="email">
-          <el-input v-model="modifyForm.email"></el-input>
+          <el-input v-model.trim="modifyForm.email"></el-input>
         </el-form-item>
         <el-form-item label="手机号码" prop="mobile">
-          <el-input v-model="modifyForm.mobile"></el-input>
+          <el-input v-model.trim="modifyForm.mobile"></el-input>
         </el-form-item>
         <el-form-item>
           <el-button @click="modifyUserVisible = false" type="warning">取消</el-button>
@@ -185,12 +190,7 @@
     <!-- /修改用户dialog -->
 
     <!-- 分配角色dialog -->
-    <el-dialog
-      @close="setRoleDialogClose"
-      title="分配角色"
-      :visible.sync="assignRolesVisible"
-      width="50%"
-    >
+    <el-dialog @close="setRoleDialogClose" title="分配角色" :visible.sync="assignRolesVisible">
       <div>
         <p>当前的用户: {{ roleInfo.username }}</p>
         <p>当前的角色: {{ roleInfo.role_name }}</p>

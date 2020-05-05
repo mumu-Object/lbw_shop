@@ -42,9 +42,11 @@ export default {
     }
   },
   created() {
+    // 获取权限列表
     this.getRightList()
   },
   methods: {
+    // 获取权限列表处理函数
     async getRightList() {
       const rightsResult = await this.$axios.get('rights/list')
       if (rightsResult.meta.status !== 200) {

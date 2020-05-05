@@ -14,7 +14,7 @@
       <el-form-item label-width="0" prop="username">
         <el-input
           prefix-icon="el-icon-user-solid"
-          v-model="loginForm.username"
+          v-model.trim="loginForm.username"
           placeholder="请输入用户名"
         ></el-input>
       </el-form-item>
@@ -22,16 +22,14 @@
       <el-form-item label-width="0" prop="password">
         <el-input
           prefix-icon="el-icon-lock"
-          v-model="loginForm.password"
+          v-model.trim="loginForm.password"
           show-password
           placeholder="请输入密码"
         ></el-input>
       </el-form-item>
       <el-form-item label-width="0">
         <el-button type="warning" @click="resetLoginForm">重置</el-button>
-        <el-button type="primary" @click="login" :loading="isLoading"
-          >登录</el-button
-        >
+        <el-button type="primary" @click="login" :loading="isLoading">登录</el-button>
       </el-form-item>
     </el-form>
   </div>
@@ -93,7 +91,10 @@ export default {
           })
           // 把token值存储在window.sessionStorage中
           window.sessionStorage.setItem('token', loginUser.data.token)
-          window.sessionStorage.setItem('lbw_shop_login-user_id', loginUser.data.id)
+          window.sessionStorage.setItem(
+            'lbw_shop_login-user_id',
+            loginUser.data.id
+          )
           this.$router.push('/home')
           // 重置登录按钮
           setTimeout(function() {
