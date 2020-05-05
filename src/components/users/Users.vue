@@ -42,7 +42,7 @@
         :cell-style="{ 'text-align': 'center', 'font-size': '12px' }"
         :loading="true"
       >
-        <el-table-column type="index" width="30" fixed></el-table-column>
+        <el-table-column type="index" width="30" fixed label="#"></el-table-column>
         <el-table-column prop="username" label="用户名" width="150">
           <template slot-scope="scope">
             <el-popover trigger="hover" placement="top">

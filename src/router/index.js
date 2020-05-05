@@ -4,6 +4,8 @@ import VueRouter from 'vue-router'
 import Login from '../components/Login.vue'
 import Home from '../components/Home.vue'
 import Users from '../components/users/Users.vue'
+import Roles from '../components/rights/Roles.vue'
+import Rights from '../components/rights/Rights.vue'
 Vue.use(VueRouter)
 // 路由规则
 const routes = [
@@ -14,7 +16,9 @@ const routes = [
     component: Home,
     redirect: '/users',
     children: [
-      { path: '/users', component: Users }
+      { path: '/users', component: Users },
+      { path: '/roles', component: Roles },
+      { path: '/rights', component: Rights }
     ]
   }
 ]
