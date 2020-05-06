@@ -34,6 +34,9 @@ body {
 .roleListTagBox {
   text-align: left;
 }
+.el-cascader-panel {
+  height: 200px;
+}
 @media screen and (max-width: 768px) {
   .el-message,
   .el-message-box,

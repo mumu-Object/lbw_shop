@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
+import treeTable from 'vue-table-with-tree-grid'
 import './plugins/element.js'
 // 导入全局css样式
 import './assets/css/global.css'
@@ -21,6 +22,8 @@ axios.interceptors.response.use(config => {
 })
 Vue.prototype.$axios = axios
 Vue.config.productionTip = false
+// 挂载tree表格组件到vue中
+Vue.component('tree-table', treeTable)
 
 new Vue({
   router,

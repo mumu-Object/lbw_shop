@@ -6,6 +6,8 @@ import Home from '../components/Home.vue'
 import Users from '../components/users/Users.vue'
 import Roles from '../components/rights/Roles.vue'
 import Rights from '../components/rights/Rights.vue'
+import Goods from '../components/shop/Goods.vue'
+import Categories from '../components/shop/Categories.vue'
 Vue.use(VueRouter)
 // 路由规则
 const routes = [
@@ -18,7 +20,9 @@ const routes = [
     children: [
       { path: '/users', component: Users },
       { path: '/roles', component: Roles },
-      { path: '/rights', component: Rights }
+      { path: '/rights', component: Rights },
+      { path: '/goods', component: Goods },
+      { path: '/categories', component: Categories }
     ]
   }
 ]
