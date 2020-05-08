@@ -37,10 +37,23 @@ body {
 .el-cascader-panel {
   height: 200px;
 }
+.el-cascaderXYS::-webkit-scrollbar {
+  display: none;
+}
+.el-alert {
+  margin-bottom: 15px;
+}
+.el-table__expanded-cell {
+  text-align: left !important;
+}
 @media screen and (max-width: 768px) {
   .el-message,
   .el-message-box,
   .el-dialog {
     width: 300px;
+  }
+  .el-cascader-panel {
+    max-width: 300px;
+    overflow: scroll;
   }
 }

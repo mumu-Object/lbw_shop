@@ -8,6 +8,7 @@ import Roles from '../components/rights/Roles.vue'
 import Rights from '../components/rights/Rights.vue'
 import Goods from '../components/shop/Goods.vue'
 import Categories from '../components/shop/Categories.vue'
+import Params from '../components/shop/Params.vue'
 Vue.use(VueRouter)
 // 路由规则
 const routes = [
@@ -22,7 +23,8 @@ const routes = [
       { path: '/roles', component: Roles },
       { path: '/rights', component: Rights },
       { path: '/goods', component: Goods },
-      { path: '/categories', component: Categories }
+      { path: '/categories', component: Categories },
+      { path: '/params', component: Params }
     ]
   }
 ]

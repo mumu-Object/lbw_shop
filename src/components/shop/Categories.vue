@@ -51,9 +51,9 @@
         @size-change="handleSizeChange"
         @current-change="handleCurrentChange"
         :current-page="queryCateInfo.pagenum"
-        :page-sizes="[5, 10, 15, 20]"
+        :page-sizes="[2, 5, 10, 20]"
         :page-size="queryCateInfo.pagesize"
-        layout="total, sizes, prev, pager, next, jumper"
+        :layout="pageLaout"
         :total="total"
       ></el-pagination>
       <!-- /分页 -->
@@ -64,7 +64,7 @@
     <el-dialog title="添加分类" :visible.sync="addCateVisible">
       <el-form ref="addCateFormRef" :model="addCateForm" :rules="addCateFormRules" status-icon>
         <el-form-item label="分类名称" prop="cat_name">
-          <el-input v-model="addCateForm.cat_name" placeholder="请输入分类名称"></el-input>
+          <el-input v-model.trim="addCateForm.cat_name" placeholder="请输入分类名称"></el-input>
         </el-form-item>
         <el-form-item label="父级分类">
           <el-cascader
@@ -89,7 +89,7 @@
     <el-dialog title="修改分类" :visible.sync="modCateVisible">
       <el-form ref="modCateFormRef" :model="modCateForm" :rules="addCateFormRules" status-icon>
         <el-form-item label="分类名称" prop="cat_name">
-          <el-input v-model="modCateForm.cat_name" placeholder="请输入分类名称"></el-input>
+          <el-input v-model.trim="modCateForm.cat_name" placeholder="请输入分类名称"></el-input>
         </el-form-item>
       </el-form>
       <div slot="footer">
@@ -107,6 +107,7 @@ export default {
   name: 'Categories',
   data() {
     return {
+      isXYS: false,
       columns: [
         {
           width: '200',
@@ -164,6 +165,12 @@ export default {
     }
   },
   created() {
+    if (window.innerWidth < 768) {
+      this.isXYS = true
+    } else {
+      this.isXYS = false
+    }
+    console.log(this.isXYS)
     this.getCateList()
   },
   methods: {
@@ -260,6 +267,7 @@ export default {
     modCateFormReset(name) {
       this.$refs[name].resetFields()
     },
+    // 删除分类
     delCate(cate) {
       this.$confirm('此操作会永久删除此分类,是否继续？', '删除分类', {
         confirmButtonText: '确认',
@@ -274,10 +282,18 @@ export default {
             return this.$message.error(delCateResult.mate.msg)
           }
           this.getCateList()
+          this.$message.success('删除分类成功')
         })
         .catch(() => {
           this.$message.info('已取消删除')
         })
+    }
+  },
+  computed: {
+    pageLaout() {
+      return this.isXYS
+        ? 'total, jumper'
+        : 'total, sizes, prev, pager, next, jumper'
     }
   }
 }
